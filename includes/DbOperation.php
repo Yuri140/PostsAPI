@@ -49,6 +49,51 @@ class DbOperation
 		return $messages; 
 	}
 	
+	function getMessagesByVotes(){
+		$stmt = $this->con->prepare("SELECT msgId, msgTitulo, msgTexto, msgData, msgRemetente, msgVotes FROM Mensagem order by msgVotes DESC ");
+		$stmt->execute();
+		$stmt->bind_result($id, $title, $text, $date, $sender, $votes);
+		
+		$messages = array(); 
+		
+		while($stmt->fetch()){
+			$message  = array();
+			$message['msgId'] = $id; 
+			$message['msgTitulo'] = $title; 
+			$message['msgTexto'] = $text; 
+			$message['msgData'] = $date; 
+			$message['msgRemetente'] = $sender;
+            $message['msgVotes'] = $votes;
+			
+			array_push($messages, $message); 
+		}
+		
+		return $messages; 
+	}
+
+	function getMessagesByDate(){
+		$stmt = $this->con->prepare("SELECT msgId, msgTitulo, msgTexto, msgData, msgRemetente, msgVotes FROM Mensagem order by msgData DESC");
+		$stmt->execute();
+		$stmt->bind_result($id, $title, $text, $date, $sender, $votes);
+		
+		$messages = array(); 
+		
+		while($stmt->fetch()){
+			$message  = array();
+			$message['msgId'] = $id; 
+			$message['msgTitulo'] = $title; 
+			$message['msgTexto'] = $text; 
+			$message['msgData'] = $date; 
+			$message['msgRemetente'] = $sender;
+            $message['msgVotes'] = $votes;
+			
+			array_push($messages, $message); 
+		}
+		
+		return $messages; 
+	}
+
+	
 	
 	function updateMessage($id, $title, $text, $date, $sender){
 		$stmt = $this->con->prepare("UPDATE Mensagem SET msgTitulo = ?, msgTexto = ?, msgData = ?, msgRemetente = ? WHERE msgId = ?");
@@ -74,4 +119,8 @@ class DbOperation
 			return true; 
 		return false; 
 	}
+	
+	
+	
+
 }
