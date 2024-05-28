@@ -31,6 +31,8 @@ select * from Mensagem;
 -- select * from Mensagem where msgData = ?; -- Busca por data
 -- select * from Mensagem where msgRemetente like '%?%'; -- Busca por remetente
 -- select * from Mensagem where msgTexto like '%?%'; -- Busca por texto
+-- select * from Mensagem order by msgVotes DES; --ordernador por votos
+-- select * from Mensagem order by msgData DES; --ordenador por data 
 
 -- --Votação
 -- update Mensagem set msgVotes = msgVotes+1 where msgId = ?; -- Votar em uma mensagem
