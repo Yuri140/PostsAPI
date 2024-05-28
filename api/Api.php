@@ -78,6 +78,21 @@
 				$response['message'] = 'Pedido concluído com sucesso';
 				$response['posts'] = $db->getMessages();
 			break; 
+
+			case 'getmessagesbydate':
+				$db = new DbOperation();
+				$response['error'] = false; 
+				$response['message'] = 'Pedido concluído com sucesso';
+				$response['posts'] = $db->getMessagesByDate();
+			break; 
+			
+			case 'getmessagesbyvotes':
+				$db = new DbOperation();
+				$response['error'] = false; 
+				$response['message'] = 'Pedido concluído com sucesso';
+				$response['posts'] = $db->getMessagesByVotes();
+			break; 
+			
 			
 			
 		
