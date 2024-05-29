@@ -93,6 +93,12 @@
 				$response['posts'] = $db->getMessagesByVotes();
 			break; 
 			
+			case 'pesquisar':
+				$db = new DbOperation();
+				$response['error'] = false; 
+				$response['message'] = 'Pedido concluído com sucesso';
+				$response['posts'] = $db->pesquisar($_GET['msgTexto']);
+			break; 
 			
 			
 		

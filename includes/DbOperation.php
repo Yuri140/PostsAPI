@@ -92,7 +92,30 @@ class DbOperation
 		
 		return $messages; 
 	}
-
+	
+	function pesquisar($text){
+		$searchTerm = '%' . $text . '%';
+		$stmt = $this->con->prepare("SELECT msgId, msgTitulo, msgTexto, msgData, msgRemetente, msgVotes FROM Mensagem where msgTexto like ? order by msgVotes DESC");
+		$stmt->bind_param("s", $searchTerm);
+		$stmt->execute();
+		$stmt->bind_result($id, $title, $text, $date, $sender, $votes);
+		
+		$messages = array(); 
+		
+		while($stmt->fetch()){
+			$message  = array();
+			$message['msgId'] = $id; 
+			$message['msgTitulo'] = $title; 
+			$message['msgTexto'] = $text; 
+			$message['msgData'] = $date; 
+			$message['msgRemetente'] = $sender;
+            $message['msgVotes'] = $votes;
+			
+			array_push($messages, $message); 
+		}
+		
+		return $messages; 
+	}
 	
 	
 	function updateMessage($id, $title, $text, $date, $sender){
